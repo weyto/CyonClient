@@ -46,6 +46,11 @@ namespace CyonClient
             return CreateDNSRecord(DNSType.CNAME, Name, Value, TTL);
         }
 
+        public Task CreateTXTRecord(string Name, string Value, DNSTTL TTL)
+        {
+            return CreateDNSRecord(DNSType.TXT, Name, Value, TTL);
+        }
+
         public async Task UpdateDNSRecord(DNSRecord Record)
         {
             if (String.IsNullOrEmpty(Record.RecordHash))
@@ -212,7 +217,7 @@ namespace CyonClient
             if (Type == DNSType.AAAA)
                 content.Add("value", WebUtility.UrlEncode(Value));
             else
-                content.Add("value", WebUtility.UrlEncode(Value));
+                content.Add("value", Value);
 
             return content;
         }
